@@ -1,9 +1,14 @@
 package main
 
 import (
+	"io"
+	"os"
+
 	"github.com/aryanicosa/golang-gin/controller"
+	"github.com/aryanicosa/golang-gin/middleware"
 	"github.com/aryanicosa/golang-gin/service"
 	"github.com/gin-gonic/gin"
+	"github.com/tpkeeper/gin-dump"
 )
 
 var(
@@ -11,15 +16,18 @@ var(
 	postController controller.PostController = controller.New(postService)
 )
 
-func main() {
-	server := gin.Default()
+//setting up the output to a log file
+func SetupLogOutput() {
+	f, _ := os.Create("gin.log") //create custom log by a file. Error ignored for a while
+	gin.DefaultWriter = io.MultiWriter(f, os.Stdout) //assign a file and standar log output
+}
 
-	//first endpoint
-	// server.GET("/test", func(ctx *gin.Context) { //create a lambda function  named ctx reference to gin.Context
-	// 	ctx.JSON(200, gin.H{
-	// 		"message" : "OK",
-	// 	})
-	// })
+func main() {
+	SetupLogOutput()
+
+	server := gin.New() //create new instance of server
+
+	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth(), gindump.Dump())
 
 	server.GET("/post", func(ctx *gin.Context) {
 		ctx.JSON(200, postController.FindAll())

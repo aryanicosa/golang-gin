@@ -1,0 +1,9 @@
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /post                     --> main.main.func1 (5 handlers)
+[GIN-debug] POST   /post                     --> main.main.func2 (5 handlers)
+[GIN-debug] Listening and serving HTTP on :8080
+::1 - [14 Oct 21 22:36 WIB] POST /post 201 449.622µs 
+::1 - [14 Oct 21 22:36 WIB] GET /post 200 189.892µs 
