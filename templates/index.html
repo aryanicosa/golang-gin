@@ -1,0 +1,31 @@
+{{ template "header.html"}}
+
+<div class="article py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            
+            <!-- loop over the data -->
+            {{range .posts}}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <iframe src="{{.URL}}"
+                        frameborder="0"
+                        width="300" height="200"
+                        allow="accelerometer; autoplay;
+                        encryoted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                        <p class="card-text">
+                            <h4>{{.Title}}</h4>
+                            <p>{{.Description}}</p>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            {{end}}
+            <!--end loop -->
+        </div>
+    </div>
+</div>
+
+{{ template "footer.html"}}

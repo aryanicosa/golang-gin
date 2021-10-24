@@ -2,8 +2,25 @@
  - using env:	export GIN_MODE=release
  - using code:	gin.SetMode(gin.ReleaseMode)
 
-[GIN-debug] GET    /post                     --> main.main.func1 (5 handlers)
-[GIN-debug] POST   /post                     --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /css,/*filepath           --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
+[GIN-debug] HEAD   /css,/*filepath           --> github.com/gin-gonic/gin.(*RouterGroup).createStaticHandler.func1 (1 handlers)
+[GIN-debug] Loaded HTML Templates (4): 
+	- header.html
+	- index.html
+	- 
+	- footer.html
+
+[GIN-debug] GET    /api/post                 --> main.main.func1 (5 handlers)
+[GIN-debug] POST   /api/post                 --> main.main.func2 (5 handlers)
+[GIN-debug] GET    /view/post                --> github.com/aryanicosa/golang-gin/controller.PostController.ShowAll-fm (5 handlers)
 [GIN-debug] Listening and serving HTTP on :8080
-::1 - [14 Oct 21 22:36 WIB] POST /post 201 449.622µs 
-::1 - [14 Oct 21 22:36 WIB] GET /post 200 189.892µs 
+::1 - [24 Oct 21 23:23 WIB] POST /api/post 200 444.754µs 
+127.0.0.1 - [24 Oct 21 23:23 WIB] GET /view/post 200 869.114µs 
+127.0.0.1 - [24 Oct 21 23:23 WIB] GET /view/post 200 663.22µs 
+::1 - [24 Oct 21 23:23 WIB] GET /view/post 401 33.175µs 
+::1 - [24 Oct 21 23:23 WIB] GET /view/post 200 943.006µs 
+::1 - [24 Oct 21 23:23 WIB] GET /favicon.ico 401 8.591µs 
+::1 - [24 Oct 21 23:23 WIB] GET /favicon.ico 404 148.065µs 
+::1 - [24 Oct 21 23:23 WIB] GET /view/post 200 912.694µs 
+::1 - [24 Oct 21 23:24 WIB] POST /api/post 200 399.705µs 
+::1 - [24 Oct 21 23:24 WIB] GET /view/post 200 566.278µs 

@@ -2,6 +2,7 @@ package main
 
 import (
 	"io"
+	"net/http"
 	"os"
 
 	"github.com/aryanicosa/golang-gin/controller"
@@ -27,15 +28,34 @@ func main() {
 
 	server := gin.New() //create new instance of server
 
+	server.Static("/css,", "./templates/assets/css")
+
+	server.LoadHTMLGlob("templates/*.html")
+
 	server.Use(gin.Recovery(), middleware.Logger(), middleware.BasicAuth(), gindump.Dump())
 
-	server.GET("/post", func(ctx *gin.Context) {
-		ctx.JSON(200, postController.FindAll())
-	})
+	//grouping Api Request
+	apiRoutes := server.Group("/api") 
+	{
+		apiRoutes.GET("/post", func(ctx *gin.Context) {
+			ctx.JSON(200, postController.FindAll())
+		})
+	
+		apiRoutes.POST("/post", func(ctx *gin.Context) {
+			err := postController.Save(ctx)
+			if err != nil {
+				ctx.JSON(http.StatusBadRequest, gin.H{ "error": err.Error()})
+			} else {
+				ctx.JSON(http.StatusOK, gin.H{ "message": "Post input is valid!"})
+			}
+		})
+	}
 
-	server.POST("/post", func(ctx *gin.Context) {
-		ctx.JSON(201, postController.Save(ctx))
-	})
+	viewRoutes := server.Group("/view")
+	{
+		viewRoutes.GET("/post", postController.ShowAll)
+	}
+	
 
 	server.Run(":8080")
 }

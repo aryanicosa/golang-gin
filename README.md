@@ -13,3 +13,8 @@
 logger.go provide our own custom log when server received request and save the response into the file `gin.log` and `basic-auth.go` user for creating basic auth security 
 
 7. `go get github.com/tpkeeper/gin-dump` we will user this library to help us debug our web app
+
+8. `go get github.com/go-playground/validator/v10@v10.4.1` adding data binding and validation 
+
+9. Get started to display static html 
+- create templates folder then provide `index.html, header.html, footer.html and css file in assets/css folder`
