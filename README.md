@@ -1,3 +1,5 @@
+# This project move to gitlab : https://gitlab.com/aryanicosa/golang-gin-gitlab
+
 1. init project `go mod init <project-name>`. Then install external library  by using `go get github.com/gin-gonic/gin`
 
 2. create `server.go`
